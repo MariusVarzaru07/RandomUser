@@ -1,4 +1,4 @@
-package com.example.raiffeisen.data.models
+package com.example.raiffeisen.data.models.user
 
 data class Dob(
     val date: String,

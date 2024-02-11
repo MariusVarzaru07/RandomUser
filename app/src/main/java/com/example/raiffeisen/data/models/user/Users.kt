@@ -1,4 +1,4 @@
-package com.example.raiffeisen.data.models
+package com.example.raiffeisen.data.models.user
 
 data class Users(
     val gender: String,

@@ -1,10 +1,8 @@
-package com.example.raiffeisen.domain.apis
+package com.example.raiffeisen.domain.repositories
 
 import com.example.raiffeisen.data.models.user.Root
 import retrofit2.Response
-import retrofit2.http.GET
 
-interface UsersService {
-    @GET("api")
+interface UserRepository {
     suspend fun getUsers(): Response<Root>
 }
