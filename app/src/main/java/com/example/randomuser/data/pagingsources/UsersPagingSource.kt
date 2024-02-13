@@ -15,12 +15,24 @@ class UsersPagingSource @Inject constructor(
         return try {
             // Start refresh at page 1 if undefined.
             val nextPageNumber = params.key ?: 0
-            val response = usersService.getUsers(page = nextPageNumber, results = 20, seed = "abc")
-            LoadResult.Page(
-                data = response.body()!!.results,
-                prevKey = null, // Only paging forward.
-                nextKey = response.body()!!.info.page.toInt() + 1
+            val response = usersService.getUsers(
+                page = nextPageNumber,
+                results = params.loadSize,
+                seed = "abc"
             )
+
+            if (nextPageNumber < 2000)
+                LoadResult.Page(
+                    data = response.body()!!.results,
+                    prevKey = null, // Only paging forward.
+                    nextKey = nextPageNumber + 1
+                ) else
+                LoadResult.Page(
+                    data = response.body()!!.results,
+                    prevKey = null, // Only paging forward.
+                    nextKey = null
+                )
+
         } catch (e: Exception) {
             // Handle errors in this block and return LoadResult.Error for
             // expected errors (such as a network failure).

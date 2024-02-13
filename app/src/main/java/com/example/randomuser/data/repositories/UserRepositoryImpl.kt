@@ -10,13 +10,17 @@ import com.example.randomuser.data.pagingsources.UsersPagingSource
 import com.example.randomuser.domain.repositories.UserRepository
 import javax.inject.Inject
 
+private const val PAGE_SIZE = 20
+
 class UserRepositoryImpl @Inject constructor(private val usersPagingSource: UsersPagingSource) :
     UserRepository {
     override suspend fun getUsers(): LiveData<PagingData<Users>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 20,
-                enablePlaceholders = false
+                pageSize = PAGE_SIZE,
+                prefetchDistance = PAGE_SIZE - 17,
+                enablePlaceholders = true,
+                initialLoadSize = PAGE_SIZE
             ),
             pagingSourceFactory = {
                 usersPagingSource
