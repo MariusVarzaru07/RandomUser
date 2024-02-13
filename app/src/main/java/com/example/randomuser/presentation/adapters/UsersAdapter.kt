@@ -1,12 +1,11 @@
 package com.example.randomuser.presentation.adapters
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.raiffeisen.R
 import com.example.raiffeisen.databinding.UsersLayoutBinding
 import com.example.randomuser.data.models.user.Users
+import com.squareup.picasso.Picasso
 
 class UsersAdapter(private val users: List<Users>) :
     RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
@@ -14,9 +13,9 @@ class UsersAdapter(private val users: List<Users>) :
     inner class ViewHolder(val binding: UsersLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(user: Users) {
-            //val picture = getUserPicture.invoke(user)
+            val userPicture = Picasso.with(binding.root.context).load(user.picture.large)
             binding.apply {
-                userImage.setImageResource(R.drawable.ic_launcher_background)
+                userPicture.into(userImage)
                 userName.text = user.name.first + user.name.last
                 userExperience.text =
                     user.registered.age.toString() + " from " + user.location.country
