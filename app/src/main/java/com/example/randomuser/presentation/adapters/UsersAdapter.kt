@@ -2,13 +2,14 @@ package com.example.randomuser.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.raiffeisen.databinding.UsersLayoutBinding
 import com.example.randomuser.data.models.user.Users
 import com.squareup.picasso.Picasso
 
-class UsersAdapter(private val users: List<Users>) :
-    RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
+class UsersAdapter : PagingDataAdapter<Users, UsersAdapter.ViewHolder>(DiffUtilCallBack) {
 
     inner class ViewHolder(val binding: UsersLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -32,9 +33,17 @@ class UsersAdapter(private val users: List<Users>) :
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.bind(users[position])
+        getItem(position)?.let { viewHolder.bind(it) }
     }
 
-    override fun getItemCount() = users.size
+    object DiffUtilCallBack : DiffUtil.ItemCallback<Users>() {
+        override fun areItemsTheSame(oldItem: Users, newItem: Users): Boolean {
+            return oldItem.name == newItem.name
+        }
+
+        override fun areContentsTheSame(oldItem: Users, newItem: Users): Boolean {
+            return oldItem == newItem
+        }
+    }
 
 }

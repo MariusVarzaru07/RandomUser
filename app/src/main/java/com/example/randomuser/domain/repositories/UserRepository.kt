@@ -1,8 +1,9 @@
 package com.example.randomuser.domain.repositories
 
-import com.example.randomuser.data.models.user.Root
-import retrofit2.Response
+import androidx.lifecycle.LiveData
+import androidx.paging.PagingData
+import com.example.randomuser.data.models.user.Users
 
 interface UserRepository {
-    suspend fun getUsers(): Response<Root>
+    suspend fun getUsers(): LiveData<PagingData<Users>>
 }
