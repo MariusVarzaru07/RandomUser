@@ -15,8 +15,6 @@ import javax.inject.Inject
 class UsersViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
 
     private val _users = MutableLiveData<PagingData<Users>>()
-    val users: LiveData<PagingData<Users>>
-        get() = _users
 
     suspend fun getUsers(): LiveData<PagingData<Users>> {
         val response = userRepository.getUsers().cachedIn(viewModelScope)

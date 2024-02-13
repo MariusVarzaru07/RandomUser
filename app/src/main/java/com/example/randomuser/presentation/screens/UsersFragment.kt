@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.raiffeisen.databinding.FragmentUsersBinding
 import com.example.randomuser.presentation.adapters.UsersAdapter
@@ -37,9 +38,16 @@ class UsersFragment @Inject constructor() : Fragment() {
     }
 
     private fun initUserAdapter() {
-        viewBinding.usersList.layoutManager = LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        viewBinding.usersList.layoutManager = layoutManager
         usersAdapter = UsersAdapter()
         viewBinding.usersList.adapter = usersAdapter
+        viewBinding.usersList.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                layoutManager.orientation
+            )
+        )
     }
 
     private fun initObservers() {

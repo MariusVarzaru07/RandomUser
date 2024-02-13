@@ -5,9 +5,11 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.raiffeisen.R
 import com.example.raiffeisen.databinding.UsersLayoutBinding
 import com.example.randomuser.data.models.user.Users
 import com.squareup.picasso.Picasso
+
 
 class UsersAdapter : PagingDataAdapter<Users, UsersAdapter.ViewHolder>(DiffUtilCallBack) {
 
@@ -17,9 +19,15 @@ class UsersAdapter : PagingDataAdapter<Users, UsersAdapter.ViewHolder>(DiffUtilC
             val userPicture = Picasso.with(binding.root.context).load(user.picture.large)
             binding.apply {
                 userPicture.into(userImage)
-                userName.text = user.name.first + user.name.last
-                userExperience.text =
-                    user.registered.age.toString() + " from " + user.location.country
+
+                userName.text = binding.root.context.getString(
+                    R.string.user_complete_name, user.name.first,
+                    user.name.last
+                )
+                userExperience.text = binding.root.context.getString(
+                    R.string.user_experience, user.dob.age.toString(),
+                    user.location.country
+                )
             }
         }
     }

@@ -60,7 +60,6 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.50")
     implementation("com.squareup.picasso:picasso:2.5.2")
     implementation("androidx.paging:paging-runtime:3.2.1")
-
     kapt("com.google.dagger:hilt-compiler:2.50")
     implementation("com.google.android.material:material:1.11.0")
     testImplementation("junit:junit:4.13.2")

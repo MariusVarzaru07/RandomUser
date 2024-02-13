@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RandomUser</string>
+    <string name="user_complete_name" formatted="false">%1$s %2$s</string>
+    <string name="user_experience" formatted="false">%1$s years from %2$s</string>
+    <string name="name">Name</string>
+    <string name="experience">Experience</string>
 </resources>
